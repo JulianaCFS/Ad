@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="PArticulo/EditarArticulo.cs">
+    <Files>
+      <File FileName="PArticulo/Main.cs" Line="1" Column="1" />
+      <File FileName="PArticulo/MainWindow.cs" Line="1" Column="1" />
+      <File FileName="PGtkSerpis/ListStoreExtensions.cs" Line="7" Column="36" />
+      <File FileName="PGtkSerpis/TreeViewExtensions.cs" Line="19" Column="45" />
+      <File FileName="PGtkSerpis/TypeExtensiones.cs" Line="12" Column="28" />
+      <File FileName="PArticulo/EditarArticulo.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
