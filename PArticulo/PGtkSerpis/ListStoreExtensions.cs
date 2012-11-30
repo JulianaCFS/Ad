@@ -1,5 +1,7 @@
+using Gtk;
 using System;
-
+using System.Collections.Generic;
+using System.Data;
 namespace Serpis.Ad
 {
 	public class ListStoreExtensions

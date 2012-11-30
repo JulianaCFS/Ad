@@ -9,6 +9,8 @@ using PArticulo;
 
 public partial class MainWindow: Gtk.Window
 {	
+	private IDbConnection dbConnection;
+	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
@@ -81,7 +83,7 @@ public partial class MainWindow: Gtk.Window
 		ListStore listStore=(ListStore)treeView.Model;
 		
 		dataReader.close();
-		dbConnection.Close ();
+		
 		
 		                                                                     
 		                                        
@@ -89,7 +91,8 @@ public partial class MainWindow: Gtk.Window
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
-	{
+	{	dbConnection.Close ();
+		
 		Application.Quit ();
 		a.RetVal = true;
 	}
@@ -101,13 +104,39 @@ public partial class MainWindow: Gtk.Window
 	//metodo que se activaraá cdo damos un clic en la accion
 	protected void OnEditActionActivated (object sender, System.EventArgs e)
 	{
-		//throw new System.NotImplementedException ();
-		ArticuloView articuloView = new ArticuloView();
+		long id = getSelectedId();//coge el id seleccionado
 		
-		articuloView.EntryNombre.Text ="Introduce el nombre";
-		articuloView.SpinButtonPrecio.Value = 1.5;
+		//para ver que ha cogido el id
+		Console.WriteLine("id={0}",id);
+		
+		//leer de la base de datos los datos
+		IDbCommand dbCommand = dbConnection.CreateCommand();
+		//dbCommand.CommandText = "select * from articulo where id=:id";
+		dbCommand.CommandText = string.Format ("select * from articulo where id=id",id);
+		IDbDataParameter dbDataParameter = dbCommand.CreateParameter ();
+		dbDataParameter.ParameterName = "id";
+		dbCommand.Parameters.Add (dbDataParameter);
+		dbDataParameter.Value = id;
+		
+		IDataReader dataReader = dbCommand.ExecuteReader ();//se ejecuta el parametro
+		dataReader.Read ();//leo el registro, sóla una vez
+		
+		
+		ArticuloView articuloView = new ArticuloView();
+		articuloView.Nombre =(string)dataReader["nombre"];
+		articuloView.Precio = double.Parse(dataReader["precio"].ToString());
 		
 		articuloView.Show ();
+		
+		dataReader.Close ();
+	}
+	private long getSelectedId()
+	{	TreeIter treeIter;
+		treeView.Selection.GetSelected (out treeIter);
+		
+		ListStore listStore = (ListStore)TreeView.Model;
+		object id = (listStore.GetValue(treeIter, 0).ToString());
+		return long.Parse(id);
 	}
 
 	
