@@ -32,48 +32,7 @@ public partial class MainWindow: Gtk.Window
 		
 		
 		
-		/*treeView.AppendColumn("Identificador",new CellRendererText(),"text",0);
-		treeView.AppendColumn("Nombre",new CellRendererText(),"text",1);
-		treeView.AppendColumn("Precio",new CellRendererText(),"text",2);
-		treeView.AppendColumn("Categoría",new CellRendererText(),"text",3);*/
 		
-		//Type[]types=new Type[dataReader.FieldCount];
-		/*List<Type> types=new List<Type>();
-		
-		for(int i=0;i<IDataReader.FieldCount;i++){
-			treeView.AppendColumn.(dataReader.GetName(1),new CellRendererText(),"text",i);
-			types.Add (typesof(string));
-			//types[i]=typeof(string);
-			                
-		}*/
-		
-		
-		
-		//crear modelo
-		//ListStore listStore=new ListStore(typeof(string),typeof(string),typeof(string),typeof(string));
-		/*Type[]types=TypeExtensiones.GetTypes(typeof(string),dataReader.FieldCount);
-		ListStrore listStore=new ListStrore(types);
-		
-		treeView.Model=listStore;
-		ListStoreExtensions.Fill(listStore,dataReader);*/
-		
-		//array genérico-dinámico
-		//ListStore listStore=new ListStore(types.ToArray());
-		
-		
-		/*while(IDataReader.Read())
-		{	//variable local,cuando se termine el ciclo,ya no se utiliza
-			// array estático string[]values=new string[dataReader.FieldCount];
-			List<string>values=new List<string>();
-			for(int i=0;i<dataReader.FieldCount;i++)
-				//values[i]=dataReader[i].ToString();
-				values.Add(dataReader[i].ToString());
-			
-			listStore.AppendValues(values,ToArray());
-			listStore.AppendValues(dataReader[0],ToString(),dataReader[1],ToString(),
-			                       dataReader[2],ToString(),IDataReader[3],ToString());
-			listStore.AppendValues("1","Nombre 1","1,5","1");
-		}*/
 		
 		
 		IDataReader dataReader=dbCommand.ExecuteReader();
@@ -109,13 +68,10 @@ public partial class MainWindow: Gtk.Window
 		//para ver que ha cogido el id
 		Console.WriteLine("id={0}",id);
 		
-		//leer de la base de datos los datos
+		//leer de la base de datos los datos, utilizando parametro
 		IDbCommand dbCommand = dbConnection.CreateCommand();
-		//dbCommand.CommandText = "select * from articulo where id=:id";
-		dbCommand.CommandText = string.Format ("select * from articulo where id=id",id);
-		IDbDataParameter dbDataParameter = dbCommand.CreateParameter ();
-		dbDataParameter.ParameterName = "id";
-		dbCommand.Parameters.Add (dbDataParameter);
+		dbUpdateCommand.CommandText = "update articulo set nombre=:nombre, precio=:precio, id=:id";
+		
 		dbDataParameter.Value = id;
 		
 		IDataReader dataReader = dbCommand.ExecuteReader ();//se ejecuta el parametro
@@ -129,6 +85,32 @@ public partial class MainWindow: Gtk.Window
 		articuloView.Show ();
 		
 		dataReader.Close ();
+		
+		//accion tiene un evento Activated
+		
+		articuloView.SaveAction.Activated += delegate{//codigo q se ejecute cdo hagan el clic 
+			Console.WriteLine("articuloView.SaveAction.Actived");
+			
+		IDbCommand dbCommand = dbConnection.CreateCommand();
+		dbUpdateCommand.CommandText = "update articulo set nombre=:nombre, precio=:precio, id=:id";
+		IDbDataParameter nombreParameter = dbUpdateCommand.CreateParameter ();
+		IDbDataParameter precioParameter = dbUpdateCommand.CreateParameter ();
+		IDbDataParameter idParameter = dbUpdateCommand.CreateParameter ();
+		nombreParameter.ParameterName = "nombre";
+		precioParameter.ParameterName = "precio";
+		idParameter.ParameterName = "id";
+		dbUpdateCommand.Parameters.Add (nombreParameter);
+		dbUpdateCommand.Parameters.Add (precioParameter);
+		dbUpdateCommand.Parameters.Add (idParameter);
+			
+		nombreParameter.Value = articuloView.Nombre;
+		precioParameter.Value = articuloView.Precio;
+		idParameter.Value = id;
+			
+			dbCommand.ExecuteNonQuery();//exception que no este controlada
+			
+			articuloView.Destroy ();
+		};
 	}
 	private long getSelectedId()
 	{	TreeIter treeIter;

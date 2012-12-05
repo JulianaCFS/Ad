@@ -1,18 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PArticulo/ArticuloView.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PArticulo/MainWindow.cs">
     <Files>
-      <File FileName="PArticulo/Main.cs" Line="1" Column="1" />
-      <File FileName="PArticulo/MainWindow.cs" Line="108" Column="45" />
-      <File FileName="PGtkSerpis/ListStoreExtensions.cs" Line="7" Column="41" />
-      <File FileName="PArticulo/ArticuloView.cs" Line="25" Column="4" />
+      <File FileName="PArticulo/MainWindow.cs" Line="146" Column="37" />
+      <File FileName="PGtkSerpis/ListStoreExtensions.cs" Line="1" Column="11" />
+      <File FileName="PArticulo/ArticuloView.cs" Line="29" Column="9" />
+      <File FileName="PGtkSerpis/TreeViewExtensions.cs" Line="8" Column="59" />
     </Files>
     <Pads>
       <Pad Id="ConnectionManagerPad">
         <State expanded="True" selected="True">
-          <Node name="localhost" expanded="True">
-            <Node name="Tablas" expanded="True" />
-          </Node>
+          <Node name="localhost" expanded="True" />
         </State>
       </Pad>
     </Pads>
