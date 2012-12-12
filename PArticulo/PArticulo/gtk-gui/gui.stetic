@@ -6,6 +6,7 @@
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <widget-library name="../../PGtkSerpis/bin/Debug/PGtkSerpis.dll" />
     <widget-library name="../bin/Debug/PArticulo.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="400 308">
@@ -24,6 +25,13 @@
         <property name="StockId">gtk-edit</property>
         <signal name="Activated" handler="OnEditActionActivated" />
       </action>
+      <action id="addAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">_Añadir</property>
+        <property name="ShortLabel" translatable="yes">_Añadir</property>
+        <property name="StockId">gtk-add</property>
+        <signal name="Activated" handler="OnAddActionActivated" />
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
@@ -37,7 +45,7 @@
           <widget class="Gtk.Toolbar" id="toolbar1">
             <property name="MemberName" />
             <property name="ShowArrow">False</property>
-            <node name="__gtksharp_113_Stetic_Editor_ActionToolbar" type="Toolbar">
+            <node name="toolbar1" type="Toolbar">
               <node type="Toolitem" action="clearAction" />
               <node type="Toolitem" action="editAction" />
             </node>
@@ -55,8 +63,8 @@
             <property name="CanFocus">True</property>
             <property name="ShadowType">In</property>
             <child>
-              <widget class="Gtk.TreeView" id="treeview1">
-                <property name="MemberName" />
+              <widget class="Gtk.TreeView" id="treeView">
+                <property name="MemberName">treeView</property>
                 <property name="CanFocus">True</property>
               </widget>
             </child>
@@ -100,7 +108,7 @@
           <widget class="Gtk.Toolbar" id="toolbar4">
             <property name="MemberName" />
             <property name="ShowArrow">False</property>
-            <node name="__gtksharp_113_Stetic_Editor_ActionToolbar" type="Toolbar">
+            <node name="toolbar4" type="Toolbar">
               <node type="Toolitem" action="saveAction" />
             </node>
           </widget>
@@ -141,7 +149,7 @@
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Entry" id="EntryNombre">
+              <widget class="Gtk.Entry" id="entryNombre">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="IsEditable">True</property>
@@ -217,7 +225,7 @@
               </packing>
             </child>
             <child>
-              <widget class="Gtk.SpinButton" id="spinbuttonPrecio">
+              <widget class="Gtk.SpinButton" id="spinButtonPrecio">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Upper">100</property>
