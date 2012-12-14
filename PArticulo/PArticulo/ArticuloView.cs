@@ -1,35 +1,32 @@
 using Gtk;
+using Serpis.Ad;
+using System.Data;
 using System;
-
 namespace PArticulo
 {
 	public partial class ArticuloView : Gtk.Window
-	{
-		public ArticuloView () : base(Gtk.WindowType.Toplevel)
+	{	
+		public ArticuloView (long id) : base(Gtk.WindowType.Toplevel)
 		{
 			this.Build ();
-		}
-		
-		public string Nombre
-		{
-			get {return entryNombre.Text;}
-			set {EntryNombre.Text = value;}
-		}
-		
-		public decimal Precio{
-			get {return Convert.ToDecimal(spinbuttonPrecio.Value);}
-			set{spinbuttonPrecio.Value = Convert.ToDouble(value);}
-		}
-		
-		public long Categoria
-		{
-			set{ //Todo implementar 
-				
+			
+			dbConnection = ApplicationContext.Instance.DbConnection;
+			
+			if(id == 0)
+			{
+				nuevo();	
 			}
+			else
+			{
+				editar();
+			}
+
+			
+				
+			
 		}
-		public Gtk.Action SaveAction{
-			get{}
-		}
+	
+		
 	}
 }
 

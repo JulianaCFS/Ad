@@ -37,7 +37,7 @@ public partial class MainWindow
 		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><toolbar name='toolbar1'><toolitem name='clearAction' action='clearAction'/><toolitem name='editAction' action='editAction'/></toolbar></ui>");
+		this.UIManager.AddUiFromString ("<ui><toolbar name='toolbar1'><toolitem name='clearAction' action='clearAction'/><toolitem name='editAction' action='editAction'/><toolitem name='addAction' action='addAction'/></toolbar></ui>");
 		this.toolbar1 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar1")));
 		this.toolbar1.Name = "toolbar1";
 		this.toolbar1.ShowArrow = false;
@@ -63,12 +63,11 @@ public partial class MainWindow
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
-		this.DefaultWidth = 400;
-		this.DefaultHeight = 308;
+		this.DefaultWidth = 417;
+		this.DefaultHeight = 323;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.clearAction.Activated += new global::System.EventHandler (this.OnClearActionActivated);
 		this.editAction.Activated += new global::System.EventHandler (this.OnEditActionActivated);
-		this.addAction.Activated += new global::System.EventHandler (this.OnAddActionActivated);
 	}
 }
