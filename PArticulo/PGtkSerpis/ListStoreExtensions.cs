@@ -11,7 +11,10 @@ namespace Serpis.Ad
 			while(dataReader.Read ()) {
 				List<string> values = new List<string>();
 				for (int index = 0; index < dataReader.FieldCount; index++)
+				{
 					values.Add (dataReader[index].ToString ());
+					Console.WriteLine("El iden es: {0} ", dataReader[index].ToString ());
+				}
 				listStore.AppendValues (values.ToArray());
 			}
 		}

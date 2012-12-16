@@ -7,6 +7,8 @@ public partial class MainWindow
 	private global::Gtk.Action clearAction;
 	private global::Gtk.Action editAction;
 	private global::Gtk.Action addAction;
+	private global::Gtk.Action refreshAction;
+	private global::Gtk.Action removeAction;
 	private global::Gtk.VBox vbox1;
 	private global::Gtk.Toolbar toolbar1;
 	private global::Gtk.ScrolledWindow scrolledwindow1;
@@ -27,6 +29,12 @@ public partial class MainWindow
 		this.addAction = new global::Gtk.Action ("addAction", global::Mono.Unix.Catalog.GetString ("_Añadir"), null, "gtk-add");
 		this.addAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("_Añadir");
 		w1.Add (this.addAction, null);
+		this.refreshAction = new global::Gtk.Action ("refreshAction", global::Mono.Unix.Catalog.GetString ("_Actualizar"), null, "gtk-refresh");
+		this.refreshAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("_Actualizar");
+		w1.Add (this.refreshAction, null);
+		this.removeAction = new global::Gtk.Action ("removeAction", global::Mono.Unix.Catalog.GetString ("_Quitar"), null, "gtk-remove");
+		this.removeAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("_Quitar");
+		w1.Add (this.removeAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -37,7 +45,7 @@ public partial class MainWindow
 		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><toolbar name='toolbar1'><toolitem name='clearAction' action='clearAction'/><toolitem name='editAction' action='editAction'/><toolitem name='addAction' action='addAction'/></toolbar></ui>");
+		this.UIManager.AddUiFromString ("<ui><toolbar name='toolbar1'><toolitem name='removeAction' action='removeAction'/><toolitem name='refreshAction' action='refreshAction'/><toolitem name='clearAction' action='clearAction'/><toolitem name='editAction' action='editAction'/><toolitem name='addAction' action='addAction'/></toolbar></ui>");
 		this.toolbar1 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar1")));
 		this.toolbar1.Name = "toolbar1";
 		this.toolbar1.ShowArrow = false;
@@ -69,5 +77,8 @@ public partial class MainWindow
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.clearAction.Activated += new global::System.EventHandler (this.OnClearActionActivated);
 		this.editAction.Activated += new global::System.EventHandler (this.OnEditActionActivated);
+		this.addAction.Activated += new global::System.EventHandler (this.OnAddActionActivated);
+		this.refreshAction.Activated += new global::System.EventHandler (this.OnRefreshActionActivated);
+		this.removeAction.Activated += new global::System.EventHandler (this.OnRemoveActionActivated);
 	}
 }

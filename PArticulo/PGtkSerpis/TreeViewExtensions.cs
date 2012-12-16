@@ -13,7 +13,8 @@ namespace Serpis.Ad
 		}
 		
 		public static void Fill(TreeView treeView, IDataReader dataReader) 
-		{
+		{	
+			
 			TreeViewExtensions.ClearColumns (treeView);
 			TreeViewExtensions.AppendColumns (treeView, dataReader);		
 			Type[] types = TypeExtensions.GetTypes (typeof(string), dataReader.FieldCount);
@@ -24,7 +25,9 @@ namespace Serpis.Ad
 		}
 		
 		public static void ClearColumns(TreeView treeView)
-		{
+		{	
+			treeView.Model = null;//antes de llamar a removeColumn para evitar los Gtk.critica
+			
 			TreeViewColumn[] treeViewColumns = treeView.Columns;
 			foreach (TreeViewColumn treeViewColumn in treeViewColumns)
 				treeView.RemoveColumn (treeViewColumn);

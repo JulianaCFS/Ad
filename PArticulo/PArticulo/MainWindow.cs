@@ -8,7 +8,8 @@ using System.Data;
 
 
 public partial class MainWindow: Gtk.Window
-{	private IDbConnection dbConnection;
+{
+	private IDbConnection dbConnection;
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
@@ -18,7 +19,7 @@ public partial class MainWindow: Gtk.Window
 		dbConnection = ApplicationContext.Instance.DbConnection;
 		dbConnection.Open ();
 		
-		IDbCommand dbCommand = ApplicationContext.Instance.DbConnection.CreateCommand ();
+		IDbCommand dbCommand = dbConnection.CreateCommand ();
 		dbCommand.CommandText = 
 			"select a.id, a.nombre, a.precio, c.nombre as categoria " +
 			"from articulo a left join categoria c " +
@@ -29,9 +30,7 @@ public partial class MainWindow: Gtk.Window
 		TreeViewExtensions.Fill (treeView, dataReader);
 		dataReader.Close ();
 		
-		dataReader = dbCommand.ExecuteReader ();
-		TreeViewExtensions.Fill (treeView, dataReader);
-		dataReader.Close ();
+	
 		
 	}
 	
@@ -51,9 +50,7 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnEditActionActivated (object sender, System.EventArgs e)
 	{
-		long id = getSelectedId();
-		ArticuloView articuloView = new ArticuloView( id );
-		articuloView.Show ();
+		showArticulo ( getSelectedId() );
 	}
 	
 	private long getSelectedId() {
@@ -66,52 +63,50 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnAddActionActivated (object sender, System.EventArgs e)
 	{
-		
-		long id = 0;
-		ArticuloAdd articuloAdd = new ArticuloAdd( id );
-		articuloAdd.Show ();
+		showArticulo (0); //nuevo
 	}
-	public void nuevo()
-	{
-		IDbCommand dbInsertCommand = dbConnection.CreateCommand ();
-				dbInsertCommand.CommandText = "insert into articulo (nombre, precio) value (:nombre, :precio)";
-				
-				DbCommandExtensions.AddParameter (dbInsertCommand, "nombre", entryNombre.Text);
-				DbCommandExtensions.AddParameter (dbInsertCommand, "precio", Convert.ToDecimal (spinButtonPrecio.Value ));
-				
 	
-				dbUpdateCommand.ExecuteNonQuery ();
-		
-	}
-	public void editar()
+	private void showArticulo(long id)
 	{
-			IDbCommand dbCommand = dbConnection.CreateCommand();
-			dbCommand.CommandText = string.Format ("select * from articulo where id={0}",id);
-			
-			IDataReader dataReader = dbCommand.ExecuteReader ();
-			dataReader.Read ();
-			
-			entryNombre.Text = (string)dataReader["nombre"];
-			spinButtonPrecio.Value = Convert.ToDouble( (decimal)dataReader["precio"] );
-			
-			dataReader.Close ();
-			
-			saveAction.Activated += delegate {
-				Console.WriteLine("saveAction.Activated");
-				
-				IDbCommand dbUpdateCommand = dbConnection.CreateCommand ();
-				dbUpdateCommand.CommandText = "update articulo set nombre=:nombre, precio=:precio where id=:id";
-				
-				DbCommandExtensions.AddParameter (dbUpdateCommand, "nombre", entryNombre.Text);
-				DbCommandExtensions.AddParameter (dbUpdateCommand, "precio", Convert.ToDecimal (spinButtonPrecio.Value ));
-				DbCommandExtensions.AddParameter (dbUpdateCommand, "id",id);
-	
-				dbUpdateCommand.ExecuteNonQuery ();
-				
-				Destroy ();
-			};	
+		ArticuloView articuloView = new ArticuloView( id );
+		articuloView.Show ();
+	}
+		
+	protected void OnRefreshActionActivated (object sender, System.EventArgs e)
+	{
+		IDbCommand dbCommand = dbConnection.CreateCommand ();
+		dbCommand.CommandText = 
+			"select a.id, a.nombre, a.precio, c.nombre as categoria " +
+			"from articulo a left join categoria c " +
+			"on a.categoria = c.id";
+		
+		IDataReader dataReader = dbCommand.ExecuteReader ();
+		
+		TreeViewExtensions.Fill (treeView, dataReader);
+		dataReader.Close ();
+		
+		dataReader = dbCommand.ExecuteReader ();
+		TreeViewExtensions.Fill (treeView, dataReader);
+		dataReader.Close ();
 		
 	}
-
+	
+	
+	protected void OnRemoveActionActivated (object sender, System.EventArgs e)
+	{	
+		
+		long id =getSelectedId();
+		//Console.WriteLine("El iden es: {0} ", id);
+			
+			IDbCommand dbDeleteCommand = dbConnection.CreateCommand ();
+			dbDeleteCommand.CommandText = "delete from articulo where id=:id";
+				
+				
+			DbCommandExtensions.AddParameter (dbDeleteCommand, "id", id);
+	
+			dbDeleteCommand.ExecuteNonQuery ();
+			
+				
+	}
 	
 }
