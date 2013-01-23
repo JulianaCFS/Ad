@@ -2,8 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="PDataSet/MainWindow.cs">
     <Files>
-      <File FileName="PDataSet/Main.cs" Line="3" Column="1" />
-      <File FileName="PDataSet/MainWindow.cs" Line="51" Column="3" />
+      <File FileName="PDataSet/MainWindow.cs" Line="60" Column="5" />
     </Files>
     <Pads>
       <Pad Id="ConnectionManagerPad">
