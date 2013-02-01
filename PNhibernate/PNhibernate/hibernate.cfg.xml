@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hinernate-configuration xmlns="urn:hibernate-configuration-2.2">
+	<session-factory>
+			<property name="connection.provider">NHibernate.Connection</property>
+	
+	</session-factory>
+
+</hinernate-configuration>
+

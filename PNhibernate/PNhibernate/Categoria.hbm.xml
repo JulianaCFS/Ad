@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping 
+		xmlns="urn:nhirbenate-mapping-2.2"
+		assembly="PNhibernate"
+		namespace="Serpis.Ad">
+	<class name="categoria">
+		<id name="id" unsaved-value="0"/>
+		<generator class="sequence">
+			<param name="sequence">categoria_id_seq</param>
+		</generator>
+		<property name="Nombre"/>
+	</class>
+</hibernate-mapping>	
+
