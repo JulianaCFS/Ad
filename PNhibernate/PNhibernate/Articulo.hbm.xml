@@ -2,12 +2,16 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    assembly="PNhibernate" 
                    namespace="Serpis.Ad">
-	<class name="Categoria">
+	<class name="Articulo">
 		<id name="Id" unsaved-value="0">
 			<generator class="sequence">
-				<param name="sequence">categoria_id_seq</param>
+				<param name="sequence">articulo_id_seq</param>
 			</generator>
 		</id>
 		<property name="Nombre"/>
+		<property name="Precio"/>
+		<!--TODO mapear propiedad Categoria -->
 	</class> 
 </hibernate-mapping>
+
+
