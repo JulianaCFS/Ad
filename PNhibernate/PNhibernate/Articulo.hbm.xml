@@ -11,6 +11,8 @@
 		<property name="Nombre"/>
 		<property name="Precio"/>
 		<!--TODO mapear propiedad Categoria -->
+		<many-to-one name="Categoria" column="Categoria"  />
+					
 	</class> 
 </hibernate-mapping>
 

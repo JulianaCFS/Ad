@@ -1,13 +1,27 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PNhibernate/hibernate.cfg.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PNhibernate/MainWindow.cs">
     <Files>
       <File FileName="PNhibernate/Main.cs" Line="1" Column="1" />
-      <File FileName="PNhibernate/MainWindow.cs" Line="29" Column="3" />
-      <File FileName="PNhibernate/Categoria.cs" Line="1" Column="1" />
-      <File FileName="PNhibernate/Categoria.hbm.xml" Line="1" Column="1" />
-      <File FileName="PNhibernate/hibernate.cfg.xml" Line="4" Column="62" />
+      <File FileName="PNhibernate/MainWindow.cs" Line="43" Column="52" />
+      <File FileName="PNhibernate/Categoria.cs" Line="8" Column="42" />
+      <File FileName="PNhibernate/Categoria.hbm.xml" Line="11" Column="28" />
+      <File FileName="PNhibernate/Articulo.cs" Line="15" Column="1" />
+      <File FileName="PNhibernate/Articulo.hbm.xml" Line="14" Column="50" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="PNhibernate" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="MainWindow.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ConnectionManagerPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
